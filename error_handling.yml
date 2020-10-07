@@ -1,0 +1,22 @@
+- name: test task failer
+  hosts: node1
+  tasks:
+    - block:
+        - name: add a user 
+          user: name=sachin state=present
+
+        - name: install a unkown package
+          yum:
+            name: sachin
+            state: present
+      
+      rescue:
+        - name: install a sachin package
+          debug:
+            msg: "hello from rescue section"
+
+      always:
+        - name: print a msg
+          debug:
+            msg: "Bye all from always section"
+

@@ -1,0 +1,7 @@
+- name: using var files in this plyabook
+  hosts: node1
+  tasks:
+    - name: testing
+      debug:
+        msg: "{{ sachin }}"
+      when: sachin is not defined

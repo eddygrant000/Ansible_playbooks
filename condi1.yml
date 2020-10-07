@@ -1,0 +1,45 @@
+- name: Setup apache webserver
+  hosts: all
+  become: true
+  gather_facts: yes
+  vars:
+    pkg: httpd
+  tasks: 
+    - name: install pkg apache server 
+      yum:
+        name: "{{ pkg  }}"
+        state: latest
+      when: ansible_distribution == 'RedHat'
+
+    - name: install apache2
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Start {{ pkg  }} Service
+      service:
+        name: "{{ pkg  }}"
+        state: started
+        enabled: yes
+      when: ansible_distribution == 'RedHat'
+
+    - name: Start apache2 Service
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Copy a file 
+      copy:
+        content: |
+          Hi from ansible setup SACHIN
+        dest: /var/www/html/index.html
+        force: yes
+
+    - name: deploy file
+      template:
+        src: index.j2
+        dest: /var/www/html/index.html
+        force: yes

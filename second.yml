@@ -1,0 +1,13 @@
+- name: first playbook
+  hosts: all
+  become: True
+  tasks:
+    - name: remove group
+      groups:
+        name: linux
+        state: absent
+      
+    - name: remove user
+      user:
+        name: sachin
+        state: absent

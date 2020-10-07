@@ -1,0 +1,12 @@
+- name: test copy module
+  hosts: deb
+  gather_facts: no
+  tasks:
+    - name: copy a file
+      copy:
+        dest: /tmp/addgel
+        mode: '0777'
+        content: |
+          Development 
+          Hello world
+          eddy grant

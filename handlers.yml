@@ -1,0 +1,19 @@
+- name: testing handlers
+  hosts: node1
+  tasks:
+    - name: install a package
+      yum:
+        name: httpd
+        state: latest
+      changed_when: True
+      notify:
+        - start service
+
+  handlers:
+    - name: start service
+      service:
+        name: httpd
+        state: started
+
+
+

@@ -1,0 +1,25 @@
+- name: install soft using loop
+  hosts: all
+  vars:
+    package_name:
+      - samba
+      - tree
+      - net-tools
+
+  tasks:
+    - name: install {{ item }}package with yum
+      yum:
+        name: "{{ item }}"
+        state: latest
+      register: sample
+      loop: "{{ package_name }}"
+      when: ansible_distribution == "RedHat"
+
+    - name: install {{ item }} package with apt
+      apt:
+        name: "{{ item }}"
+        state: latest
+        force_apt_get: yes
+      register: sample
+      loop: "{{ package_name }}"
+      when: ansible_distribution == "Ubuntu"

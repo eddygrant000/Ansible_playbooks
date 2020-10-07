@@ -1,0 +1,17 @@
+- name: using var files
+  hosts: node1
+  gather_facts: no
+  vars_files: vars.yml
+  tasks:
+   - name: print msg
+     group:
+      name: "{{ item }}"
+     loop:
+      - "{{ users.keys() }}"
+   - name: add users
+     user:
+       name: "{{ item }}"
+       groups: "{{ item }}"
+       append: yes
+     loop:
+       - "{{ users.dev }}"

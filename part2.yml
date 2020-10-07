@@ -1,0 +1,10 @@
+- name: create paritions
+  hosts: rpm
+  tasks:
+    - name: create paritions
+      parted:
+        device: /dev/xvdf
+        number: 2
+        state: present
+        part_start: 2GB
+        part_end: 3GB

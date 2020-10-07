@@ -1,0 +1,10 @@
+- name: test 
+  hosts: all
+  tasks:
+    - name: using command module
+      command: 
+        args: 'whoami'
+      register: logs
+
+    - debug:
+        var: logs 

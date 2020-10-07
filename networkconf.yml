@@ -1,0 +1,11 @@
+- name: using network role
+  hosts: node2
+  vars:
+    network_connections:
+     - name: eddytest
+       type: ethernet
+       interface_name: eth0
+       ip: 
+         dhcp4: yes 
+  roles:
+   - rhel-system-roles.network 

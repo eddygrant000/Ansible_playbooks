@@ -1,0 +1,18 @@
+- name: add user via loop
+  hosts: all
+  tasks: 
+    - name: add users
+      user: 
+        name: "{{ item.user }}"
+        uid: "{{ item.id }}"
+        state: present
+      loop:
+        - user: sachin
+          id: 2000
+        - user: eddy
+          id: 3000
+        - user: grant
+          id: 4000
+        - user: connection
+          id: 5000
+      when: item.id > 3000

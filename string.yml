@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+    - name: using command
+      shell: grep Port /etc/ssh/sshd_config
+      register: sample
+    - debug: var=sample.stdout_lines

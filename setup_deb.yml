@@ -1,0 +1,26 @@
+- name: setup on rhel
+  hosts: deb
+  become: yes # become sudo user
+  vars:
+    - package: httpd
+    - service: apache2
+  tasks:
+    - name:  install rhel
+      yum:
+        name: "{{ package }}"
+        state: present
+
+    - name: service start {{ service }}
+      service:
+        name: "{{ service }}"
+        state: started
+        enabled: yes
+
+    - name: deploy webpage
+      copy:
+        dest: /var/www/html/index.html
+        force: yes
+        content: |
+         Hey i am eddy grant
+         from ubuntu machine 
+         Ansible 

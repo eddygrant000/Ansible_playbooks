@@ -1,0 +1,8 @@
+- name: test play using secrat vault
+  hosts: node1
+  vars_files:
+    - data.yml
+  tasks:
+    - name: print variable
+      debug:
+        var: sample

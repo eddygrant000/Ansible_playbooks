@@ -1,0 +1,43 @@
+- name: install soft using loop
+  hosts: all
+  tasks:
+    - name: install package with yum
+      yum:
+        name: "{{ item }}"
+        state: latest
+      register: sample
+      loop:
+        - httpd
+        - samba
+        - openssh-server
+        - openssh-clients
+      when: ansible_distribution == "RedHat"
+
+    - name: install package with apt
+      apt:
+        name: "{{ item }}"
+        state: latest
+      register: sample
+      loop:
+        - apache2
+        - samba
+        - openssh-server
+      when: ansible_distribution == "Ubuntu"
+
+    - name: "start service ex: httpd"
+      service:
+        name: "{{ item }}"
+        state: started
+      loop:
+        - httpd
+        - sshd
+      when: ansible_distribution == "RedHat"
+
+    - name: "start service ex: apache2"
+      service:
+        name: "{{ item }}"
+        state: started
+      loop:
+        - apache2
+        - sshd
+      when: ansible_distribution == "Ubuntu"

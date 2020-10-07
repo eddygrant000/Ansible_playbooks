@@ -1,0 +1,33 @@
+- name: testing handlers
+  hosts: node2
+  force_handlers: yes
+  tasks:
+    - name: install package
+      yum:
+        name: httpd
+        state: latest
+      register: sample
+      notify:
+        - start httpd
+        - print output
+
+    - name: install sachin
+      yum:
+        name: sachin
+        state: latest
+
+  handlers:
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+
+    - name: print output
+      debug:
+        var: sample
+
+
+     
+
+
+       

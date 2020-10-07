@@ -1,0 +1,36 @@
+- name: setup on rhel
+  hosts: rpm
+  become: yes # become sudo user
+  tasks:
+    - name:  install rhel
+      yum:
+        name:
+          - httpd
+          - firewalld
+        state: present
+
+    - name: service start httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: service start firewalld
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: deploy webpage
+      copy:
+        src: web.html
+        dest: /var/www/html/index.html
+        force: yes
+
+    - name: add service in firewalld 
+      firewalld:
+        service: http
+        state: enabled
+        permanent: yes
+        immediate: yes
+

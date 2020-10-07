@@ -1,0 +1,10 @@
+- name: setup on rhel
+  hosts: deb
+  become: yes # become sudo user
+  vars_files:
+    - bla.yml
+  tasks:
+    - name:  install {{ pkg1 }}
+      apt:
+        name: "{{ pkg1 }}"
+        state: latest

@@ -1,0 +1,5 @@
+- hosts: all
+  tasks:
+    - synchronize:
+        src: sample.txt
+        dest: /tmp/sample.txt

@@ -1,0 +1,53 @@
+- name: contional playbook
+  hosts: all
+  become: yes
+  gather_facts: yes
+  vars:
+    - pkg1: httpd
+    - pkg2: apache2
+  tasks:
+    - name: install {{ pkg1 }}  machines
+      yum:
+        name: "{{ pkg1 }}"
+        state: latest
+      when: ansible_distribution == 'RedHat'
+      tags:
+        - install1
+
+
+    - name: install {{ pkg2 }}  machines
+      apt:
+        name: "{{ pkg2 }}"
+        state: latest
+      when: ansible_distribution == 'Ubuntu'
+      tags:
+        - install2
+
+    - name: start service on redhat
+      service:
+        name: "{{ pkg1 }}"
+        state: started
+      when: ansible_distribution == 'RedHat'
+      tags:
+        - addservice
+
+    - name: start service on ubuntu
+      service:
+        name: "{{ pkg2 }}"
+        state: started
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: deploy website
+      copy:
+        dest: /var/www/html/index.html
+        src: web.html
+        force: yes
+    - name: add firewall rule
+      firewalld:
+        service: http
+        state: enabled
+        permanent: yes
+        immediate: yes
+      when: ansible_distribution == 'RedHat'
+      tags:
+        - add service

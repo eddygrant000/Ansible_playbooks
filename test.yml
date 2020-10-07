@@ -1,0 +1,7 @@
+- name: first playbook
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: add one user
+      user:
+        name: sachin

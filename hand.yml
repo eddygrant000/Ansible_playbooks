@@ -1,0 +1,36 @@
+- name: testing handlers
+  hosts: node2
+  tasks:
+    - name: install package
+      yum:
+        name: httpd
+        state: latest
+      register: sample
+      changed_when: true
+      notify:
+        - start httpd
+        - print output
+
+    - name: copy files
+      copy:
+        content: |
+          HI all from ansible
+          EDDY GRANT XXXXXXXX
+        dest: /var/www/html/index.html
+        force: yes
+
+  handlers:
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+
+    - name: print output
+      debug:
+        var: sample
+
+
+     
+
+
+       

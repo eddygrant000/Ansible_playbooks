@@ -1,0 +1,21 @@
+- name: test task failer
+  hosts: node1
+  ignore_errors: yes
+  tasks:
+    - name: add a user 
+      user: name=sachin state=present
+
+    - name: install a unkown package
+      yum:
+        name: unkwown
+        state: present
+      
+    - name: install a sachin package
+      yum:
+        name: sachin
+        state: present
+
+    - name: print a msg
+      debug:
+        msg: "Hello World From Eddy Grant"
+

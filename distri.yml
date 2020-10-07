@@ -1,0 +1,7 @@
+- name: using facts
+  hosts: node1
+  gather_facts: yes
+  tasks:
+    - name: ip address of machine
+      debug:
+        msg: "{{ ansible_distribution }}"

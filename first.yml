@@ -1,0 +1,15 @@
+- name: first playbook
+  hosts: all
+  become: True
+  tasks:
+    - name: add a group
+      group:
+        name: linux
+        state: present
+      
+    - name: add one user
+      user:
+        name: sachin
+        uid: 2000
+        comment: 'Sachin saini'
+        groups: linux

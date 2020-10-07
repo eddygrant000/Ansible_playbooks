@@ -1,0 +1,7 @@
+- name: create swap 
+  hosts: rpm
+  tasks:
+    - name: install file swap
+      command: mkswap /dev/xvdf2
+    - name: mount swap
+      command: swapon /dev/xvdf2

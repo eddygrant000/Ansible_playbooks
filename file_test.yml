@@ -1,0 +1,8 @@
+- name: test file module
+  hosts: deb
+  gather_facts: no
+  tasks:
+    - name: file a file
+      file:
+        path: /blatest
+        state: absent

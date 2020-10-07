@@ -1,0 +1,33 @@
+- name: install package 
+  hosts:  all
+  force_handlers: yes
+  tasks:
+    - name: using httpd module
+      debug:
+        msg: hi all 
+      changed_when: True
+      notify:
+        - start service
+        - test hand
+
+    - name: using httpd module
+      apt:
+        name: apache2
+        state: latest
+
+    - name: using httpd module
+      yum:
+        name: vim
+        state: latest
+
+
+
+  handlers:
+    - name: start service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: test hand
+      debug:
+        msg: Hi all from samba handelers

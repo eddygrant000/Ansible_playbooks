@@ -1,0 +1,10 @@
+- name: testing
+  hosts: deb
+  tasks:
+    - name: check user 
+      command: id manish
+      register: sample
+
+    - name: print message
+      debug:
+        var: sample.stdout

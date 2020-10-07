@@ -1,0 +1,7 @@
+- name: using variable
+  hosts: node2
+  tasks:
+    - copy:
+        src: index.html
+        dest: "{{ sachin }}"
+   

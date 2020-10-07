@@ -1,0 +1,11 @@
+- name: testing facts
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: print facts
+      debug:
+        var: ansible_distribution 
+
+    - name: print facts
+      debug:
+        var: ansible_all_ipv4_addresses 

@@ -1,0 +1,2 @@
+rhel_package: httpd
+deb_package: apache2

@@ -1,0 +1,9 @@
+- name: start httpd
+  service:
+    name: "{{ rhel_package }}"
+    state: started
+
+- name: start apache2
+  service:
+    name: "{{ deb_package }}"
+    state: started

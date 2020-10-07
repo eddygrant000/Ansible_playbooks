@@ -1,0 +1,29 @@
+- name: using error handling
+  hosts: all
+  tasks:
+    - name: using block section
+      block:
+        - name: install a package in rpm 
+          yum:
+            name: "{{ item }}"
+            state: latest
+          when: ansible_distribution == 'RedHat'
+          loop:
+            - httpd
+            - samba
+            - vim 
+            - tree
+
+        - name: install a package in deb
+          yum:
+            name: apache2
+            state: latest
+          when: ansible_distribution == 'Ubuntu'
+      rescue:
+        - name: print a msg
+          debug:
+            msg: 'HI all from resuce mode'
+      always:
+        - name: 
+          debug:
+            msg: 'Hi all from always section'

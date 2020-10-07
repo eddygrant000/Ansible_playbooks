@@ -1,0 +1,6 @@
+- name: setup apache2
+  hosts: all
+  roles:
+    - sachin
+  vars:
+    rhel_package: httpd

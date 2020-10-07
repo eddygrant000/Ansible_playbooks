@@ -1,0 +1,12 @@
+- name: install package 
+  hosts:  rpm
+  tasks:
+    - name: using httpd module
+      yum:
+        name: httpd
+        state: latest
+      register: sample
+    
+    - name: print using module
+      debug:
+        var: sample

@@ -1,0 +1,12 @@
+- hosts: all
+  gather_facts: false
+  tasks: 
+    - command: ls /root
+      register: sample
+    - debug:
+        msg: "{{ sample.stdout_lines|length }}"
+
+    - name: bla
+      debug:
+        msg: hi all from condition
+      when: sample.stdout_lines|length > 27

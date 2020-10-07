@@ -1,0 +1,13 @@
+- name: fetch hostname of hosts
+  hosts: all
+  vars:
+    - usern: sachin
+  gather_facts: yes
+  tasks:
+    - name: print hostname of machines
+      debug:
+        #msg: "{{ ansible_default_ipv4['address']  }}"
+        #msg: "{{ ansible_default_ipv4.address }}"
+        msg: Hey i am eddy grant "{{ ansible_distribution }}" 
+    - debug:
+        var: "{{ usern }}"

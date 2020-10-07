@@ -1,0 +1,12 @@
+- name: using block module
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: edit a file
+      blockinfile:
+        path: /tmp/sample.txt
+        block: |
+         Hi Sachin was here
+         This is Eddy Grant
+         Port 22 TCP 
+        state: absent

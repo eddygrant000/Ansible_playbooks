@@ -1,0 +1,9 @@
+- name: setup ntp 
+  hosts: node2
+  roles:
+   - rhel-system-roles.timesync
+  vars:
+    timesync_ntp_servers:
+      - hostname: classroom.example.com
+        iburst: yes
+

@@ -1,0 +1,20 @@
+- name: To install Apache web server
+  hosts: g1
+  tasks:
+    - name: install apache with yum
+      yum:
+        name: httpd
+        state: absent
+
+- name: To install Apache web server
+  hosts: g2
+  tasks:
+    - name: install apache with apt
+      apt:
+        name: apache2
+        state: absent
+    - name: Start Service
+      service:
+        name: apache2
+        state: stopped
+        enabled: no

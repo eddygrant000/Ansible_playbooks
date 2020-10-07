@@ -1,0 +1,19 @@
+- name: install httpd
+  yum:
+    name: "{{ rhel_package }}"
+    state: latest
+  when: ansible_distribution == "RedHat"
+  notify: start httpd
+
+- name: install apache2
+  apt:
+    name: "{{ deb_package }}"
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  notify: start apache2
+
+- name: deploy website
+  template:
+    src: index.j2
+    dest: /var/www/html/index.html
+    force: yes

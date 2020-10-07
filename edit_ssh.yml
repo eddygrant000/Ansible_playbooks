@@ -1,0 +1,11 @@
+- name: change configuration
+  hosts: all
+  tasks:
+    - name: modify port number
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        #regexp: '^#Port 22'
+        #regexp: '^Port 22'
+        #regexp: '^Port [0-9]+'
+        insertafter: '#Port 22'
+        line: '#  This is edit bye sachin'

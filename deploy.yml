@@ -1,0 +1,8 @@
+- name: deploy hosts file
+  hosts: all
+  tasks:
+    - name: using template depoly jinja
+      template:
+        src: hosts.j2
+        dest: /etc/hosts
+        backup: true

@@ -1,0 +1,26 @@
+- name: Setup apache webserver
+  hosts: node2
+  become: true
+  vars:
+    pkg: httpd
+  tasks: 
+    - name: install pkg apache server 
+      apt:
+        name: "{{ pkg  }}"
+        state: latest
+
+    - name: Start {{ pkg  }} Service
+      service:
+        name: "{{ pkg  }}"
+        state: started
+        enabled: yes
+
+    - name: Copy a file 
+      copy:
+        content: |
+          Hi from ansible setup
+          Hi all
+          Bye all
+          Good Bye
+        dest: /var/www/html/index.html
+        force: yes

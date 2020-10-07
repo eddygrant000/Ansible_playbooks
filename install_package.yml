@@ -1,0 +1,40 @@
+- name: To install Apache web server
+  hosts: g1
+  gather_facts: False
+  vars:
+    - rhel_name: httpd
+  tasks:
+    - name: install software {{ rhel_name }} in redhat
+      yum:
+        name: "{{ rhel_name }}"
+        state: latest
+    - name: Start Service
+      service:
+        name: "{{ rhel_name }}"
+        state: started
+        enabled: yes
+    - name: Deploy a website
+      copy:
+        src: index2.html
+        dest: /var/www/html/index.html
+        force: yes
+
+- name: To install Apache web server
+  hosts: g2
+  vars:
+    - ub_name: apache2
+  tasks:
+    - name: install apache with apt
+      apt:
+        name: "{{ ub_name }}"
+        state: latest
+    - name: Start Service
+      service:
+        name: "{{ ub_name }}"
+        state: started
+        enabled: yes
+    - name: Deploy a website
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        force: yes

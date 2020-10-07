@@ -1,0 +1,8 @@
+- name: change port
+  hosts: all
+  tasks:
+    - name: change port number 
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^Port 22'
+        state: absent

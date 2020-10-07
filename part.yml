@@ -1,0 +1,22 @@
+- name: create paritions
+  hosts: rpm
+  tasks:
+    - name: create paritions
+      parted:
+        device: /dev/xvdf
+        number: 1
+        state: present
+        part_end: 2GB
+        
+    - name: insert a file system
+      filesystem:
+        fstype: ext4
+        dev: /dev/xvdf1
+
+    - name: mount device 
+      mount: 
+        src: /dev/xvdf1
+        path: /mnt
+        fstype: ext4
+        state: mounted
+

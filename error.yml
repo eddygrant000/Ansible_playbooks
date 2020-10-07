@@ -1,0 +1,22 @@
+- name: error testing
+  hosts: all
+  #ignore_errors: yes
+  tasks:
+    - name: print msg
+      debug:
+        msg: Hi all from "{{ ansible_distribution }}"
+
+    - name: install package
+      yum:
+        name: httpd
+        state: latest
+      ignore_errors: yes
+
+    - name: install package in ubuntu
+      apt:
+        name: apache2
+        state: latest
+
+    - name: print msg
+      debug:
+        msg: Hi all from "{{ ansible_hostname }}"

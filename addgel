@@ -1,0 +1,10 @@
+[deb]
+node1 
+
+[rpm]
+node2 ansible_user=ec2-user
+
+[linux:children]
+deb
+rpm
+
